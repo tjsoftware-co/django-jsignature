@@ -4,12 +4,15 @@
 """
 import json
 from itertools import chain
+
 from PIL import Image, ImageDraw, ImageOps
+
+from jsignature.settings import JSIGNATURE_COLOR
 
 AA = 5  # super sampling gor antialiasing
 
 
-def draw_signature(data, as_file=False):
+def draw_signature(data, as_file=False, fill=JSIGNATURE_COLOR):
     """ Draw signature based on lines stored in json_string.
         `data` can be a json object (list in fact) or a json string
         if `as_file` is True, a temp file is returned instead of Image instance
@@ -39,7 +42,7 @@ def draw_signature(data, as_file=False):
         len_line = len(line['x'])
         points = [(line['x'][i] * AA, line['y'][i] * AA)
                   for i in range(0, len_line)]
-        draw.line(points, fill="#000", width=2 * AA)
+        draw.line(points, fill=fill, width=2 * AA)
     im = ImageOps.expand(im)
     # Smart crop
     bbox = im.getbbox()
