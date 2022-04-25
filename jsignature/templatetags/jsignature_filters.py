@@ -11,7 +11,7 @@ register = template.Library()
 
 @register.filter
 def signature_base64(value):
-    if value is None or not isinstance(value, str):
+    if value is None or not isinstance(value, (str, list)):
         return ""
     in_mem_file = io.BytesIO()
     draw_signature(value).save(in_mem_file, format="PNG")
