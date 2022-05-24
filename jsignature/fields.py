@@ -31,8 +31,7 @@ class JSignatureField(models.Field):
 
     def to_python(self, value):
         """
-        Validates that the input can be red as a JSON object. Returns a Python
-        datetime.date object.
+        Validates that the input can be read as a JSON object.
         """
         if value in JSIGNATURE_EMPTY_VALUES:
             return None

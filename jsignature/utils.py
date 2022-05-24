@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageOps
 
 from jsignature.settings import JSIGNATURE_COLOR
 
-AA = 5  # super sampling gor antialiasing
+AA = 5  # super sampling for antialiasing
 
 
 def draw_signature(data, as_file=False, fill=JSIGNATURE_COLOR, width=None, height=None):
@@ -29,7 +29,7 @@ def draw_signature(data, as_file=False, fill=JSIGNATURE_COLOR, width=None, heigh
     elif type(data) is list:
         drawing = data
     else:
-        raise ValueError
+        raise TypeError(f"draw_signature() argument must be a list or string, not {type(data).__name__}")
 
     # Compute box
     if not width:
