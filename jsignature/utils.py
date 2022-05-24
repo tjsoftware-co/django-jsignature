@@ -12,7 +12,7 @@ from jsignature.settings import JSIGNATURE_COLOR
 AA = 5  # super sampling gor antialiasing
 
 
-def draw_signature(data, as_file=False, fill=JSIGNATURE_COLOR):
+def draw_signature(data, as_file=False, fill=JSIGNATURE_COLOR, width=None, height=None):
     """ Draw signature based on lines stored in json_string.
         `data` can be a json object (list in fact) or a json string
         if `as_file` is True, a temp file is returned instead of Image instance
@@ -32,8 +32,10 @@ def draw_signature(data, as_file=False, fill=JSIGNATURE_COLOR):
         raise ValueError
 
     # Compute box
-    width = int(round(max(chain(*[d['x'] for d in drawing])))) + 10
-    height = int(round(max(chain(*[d['y'] for d in drawing])))) + 10
+    if not width:
+        width = int(round(max(chain(*[d['x'] for d in drawing])))) + 10
+    if not height:
+        height = int(round(max(chain(*[d['y'] for d in drawing])))) + 10
 
     # Draw image
     im = Image.new("RGBA", (width * AA, height * AA))
